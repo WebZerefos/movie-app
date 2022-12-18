@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { useEffect } from 'react'
+
+const API_URL = 'http://www.omdbapi.com/?apikey=74778896'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const searchMovies = async (title) => {
+		const res = await fetch(`${API_URL}&s=${title}`)
+		const data = await res.json()
+
+		console.log(data.Search)
+	}
+
+	useEffect(() => {
+		searchMovies('Thor')
+	}, [])
+
+	return (
+		<div className='App'>
+			<h1>Hello React</h1>
+		</div>
+	)
 }
 
-export default App;
+export default App
+
+// async function getMemes() {
+//   const res = await fetch('https://api.imgflip.com/get_memes')
+//   const data = await res.json()
+//   setAllMemes(data.data.memes)
+// }
+// getMemes()
